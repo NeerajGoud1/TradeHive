@@ -1,0 +1,56 @@
+.nav-link {
+  margin-left: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.footer-links a {
+  color: rgba(0, 0, 0, 0.516);
+  font-size: 14px;
+}
+
+.footer-down span {
+  color: rgba(0, 0, 0, 0.516);
+  font-size: 13px;
+}
+
+.footer-para p {
+  color: rgba(128, 128, 128, 0.831);
+}
+
+.about-para p {
+  font-size: 17px;
+  line-height: 30px;
+}
+
+.table.no-inner-borders td,
+.table.no-inner-borders th {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.table.no-inner-borders tr:not(:last-child) td,
+.table.no-inner-borders tr:not(:last-child) th {
+  border-bottom: 1px solid #dee2e6; /* optional, keep row separators */
+}
+
+.table.no-inner-borders thead th {
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table.no-inner-borders {
+  border: 1px solid #dee2e6; /* outer border */
+}
+
+#supportHero {
+  background-color: rgb(56, 126, 209);
+  color: white;
+}
+
+/* #supportWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 150px;
+} */
