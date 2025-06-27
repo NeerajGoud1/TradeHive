@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Summary = () => {
+  const [holdings, setHoldings] = useState([]);
+
+  const totalInvestment = holdings
+    .reduce((acc, stock) => {
+      return acc + stock.avg;
+    }, 0)
+    .toFixed(2);
+
+  const totalcurrValue = holdings
+    .reduce((acc, stock) => {
+      return acc + stock.avg * stock.qty;
+    }, 0)
+    .toFixed(2);
+
+  function formatToK(value) {
+    return (value / 1000).toFixed(2) + "k";
+  }
+
+  const pandl = totalcurrValue - totalInvestment;
+  const plPercentage = (pandl / totalInvestment) * 100;
+
+  useEffect(() => {
+    const getHoldings = async () => {
+      try {
+        let response = await axios.get("http://localhost:3002/api/holdings");
+        setHoldings(response.data);
+      } catch (err) {
+        console.error("Fetch failed:", err);
+      }
+    };
+    getHoldings();
+  }, []);
   return (
     <>
       <div className="username">
@@ -40,7 +73,7 @@ const Summary = () => {
         <div className="data">
           <div className="first">
             <h3 className="profit">
-              1.55k <small>+5.20%</small>{" "}
+              {formatToK(pandl)} <small>+{plPercentage.toFixed(2)}%</small>{" "}
             </h3>
             <p>P&L</p>
           </div>
@@ -48,10 +81,10 @@ const Summary = () => {
 
           <div className="second">
             <p>
-              Current Value <span>31.43k</span>{" "}
+              Current Value <span>{formatToK(totalcurrValue)}</span>{" "}
             </p>
             <p>
-              Investment <span>29.88k</span>{" "}
+              Investment <span>{formatToK(totalInvestment)}</span>{" "}
             </p>
           </div>
         </div>

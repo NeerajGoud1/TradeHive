@@ -2,9 +2,25 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { VerticalGraph } from "./VerticalGraph";
 
 const Holdings = () => {
   const [holdings, setHoldings] = useState([]);
+
+  const totalInvestment = holdings
+    .reduce((acc, stock) => {
+      return acc + stock.avg;
+    }, 0)
+    .toFixed(2);
+
+  const totalcurrValue = holdings
+    .reduce((acc, stock) => {
+      return acc + stock.avg * stock.qty;
+    }, 0)
+    .toFixed(2);
+
+  const pandl = totalcurrValue - totalInvestment;
+  const plPercentage = (pandl / totalInvestment) * 100;
 
   useEffect(() => {
     const getHoldings = async () => {
@@ -17,6 +33,20 @@ const Holdings = () => {
     };
     getHoldings();
   }, []);
+
+  // graphs
+  const labels = holdings.map((subArray) => subArray["name"]); //it will return a sub array of all stocks names
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Stock Price",
+        data: holdings.map((stock) => stock.price),
+        backgroundColor: "rgba(255, 99, 133, 0.22)",
+      },
+    ],
+  };
 
   return (
     <>
@@ -62,22 +92,21 @@ const Holdings = () => {
 
       <div className="row">
         <div className="col">
-          <h5>
-            29,875.<span>55</span>{" "}
-          </h5>
+          <h5>{totalInvestment}</h5>
           <p>Total investment</p>
         </div>
         <div className="col">
-          <h5>
-            31,428.<span>95</span>{" "}
-          </h5>
+          <h5>{totalcurrValue}</h5>
           <p>Current value</p>
         </div>
         <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
+          <h5>
+            {pandl.toFixed(2)} ({plPercentage.toFixed(2)}%)
+          </h5>
           <p>P&L</p>
         </div>
       </div>
+      <VerticalGraph data={data} />
     </>
   );
 };

@@ -22,7 +22,6 @@ function App() {
           <Route path="/product" element={<ProductPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/support" element={<SupportPage />} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

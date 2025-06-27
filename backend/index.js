@@ -147,6 +147,13 @@ const DATABASE = process.env.MONGO_URL;
 //   });
 // }
 
+// async function fun() {
+//   await Holding.deleteMany({});
+//   console.log("deleted");
+// }
+// fun();
+// insert();
+
 app.use("/api", HoldingRouter);
 app.use("/api", PositionRouter);
 app.use("/api", OrderRouter);
