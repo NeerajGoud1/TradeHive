@@ -23,11 +23,11 @@ function LeftSection({
           <div>
             <a href={tryDemo}>
               Try Demo &nbsp;{" "}
-              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
             </a>
             <a href={learnMore} style={{ marginLeft: "70px" }}>
               Learn More &nbsp;
-              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
           <div className="mt-3">

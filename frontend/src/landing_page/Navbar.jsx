@@ -1,14 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   return (
     <nav
-      class="navbar navbar-expand-lg border-bottom sticky-top"
+      className="navbar navbar-expand-lg border-bottom sticky-top"
       style={{ backgroundColor: "#FFF" }}
     >
-      <div class="container p-2">
-        <Link to="/" class="navbar-brand">
+      <div className="container p-2">
+        <Link to="/" className="navbar-brand">
           <img
             src="media/images/logo.svg"
             style={{ width: "25%" }}
@@ -16,7 +18,7 @@ function Navbar() {
           />
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -24,43 +26,60 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex" role="search">
-            <ul class="navbar-nav mb-lg-0">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/signup">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <form className="d-flex" role="search">
+            <ul className="navbar-nav mb-lg-0">
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/signup"
+                >
                   Signup
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/about">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/about">
                   About
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/product">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/product">
                   Product
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/pricing">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/pricing">
                   Pricing
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/support">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/support">
                   Support
                 </Link>
               </li>
-              <li class="nav-item">
-                <i
-                  style={{ marginTop: "2px", fontSize: "20px" }}
-                  class="fa fa-bars nav-link active"
-                  aria-hidden="true"
-                ></i>
-              </li>
+              {/* <li className="nav-item">
+                <button
+                  className="nav-link active"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    if (token) {
+                      window.location.href = `http://localhost:5174/dashboard?token=${token}`;
+                    } else {
+                      navigate("/signup");
+                    }
+                  }}
+                >
+                  Dashboard
+                </button>
+              </li> */}
             </ul>
           </form>
         </div>

@@ -7,7 +7,8 @@ function CreateTicket() {
         <h1 className="fs-2">To create a ticket, select a relevant topic</h1>
         <div className="col-4 p-5 mt-2 ">
           <p className="fs-5">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> Account Opening
+            <i className="fa fa-plus-circle" aria-hidden="true"></i> Account
+            Opening
           </p>
           <a href="" style={{ textDecoration: "none", lineHeight: "2.5" }}>
             Online Account Opening
@@ -44,7 +45,7 @@ function CreateTicket() {
         </div>
         <div className="col-4 p-5 mt-2 ">
           <p className="fs-5">
-            <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Your Zerodha
+            <i className="fa fa-user" aria-hidden="true"></i>&nbsp;Your Zerodha
             Account
           </p>
           <a href="" style={{ textDecoration: "none", lineHeight: "2.5" }}>
@@ -69,7 +70,8 @@ function CreateTicket() {
         </div>
         <div className="col-4 p-5 mt-2 ">
           <p className="fs-5">
-            <span class="material-symbols-outlined">bar_chart</span> &nbsp;Kite
+            <span className="material-symbols-outlined">bar_chart</span>{" "}
+            &nbsp;Kite
           </p>
           <a href="" style={{ textDecoration: "none", lineHeight: "2.5" }}>
             IPO
@@ -97,7 +99,7 @@ function CreateTicket() {
         </div>
         <div className="col-4 p-5  mb-2">
           <p className="fs-5">
-            <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;Funds
+            <i className="fa fa-credit-card" aria-hidden="true"></i> &nbsp;Funds
           </p>
           <a href="" style={{ textDecoration: "none", lineHeight: "2.5" }}>
             Add money
@@ -117,7 +119,7 @@ function CreateTicket() {
         </div>
         <div className="col-4 p-5 mb-2">
           <p className="fs-5">
-            <i class="fa fa-gg-circle" aria-hidden="true"></i> &nbsp;Console
+            <i className="fa fa-gg-circle" aria-hidden="true"></i> &nbsp;Console
           </p>
           <a href="" style={{ textDecoration: "none", lineHeight: "2.5" }}>
             Portfolio
@@ -145,7 +147,7 @@ function CreateTicket() {
         </div>
         <div className="col-4 p-5  mb-2">
           <p className="fs-5">
-            <i class="fa fa-certificate" aria-hidden="true"></i> Coin
+            <i className="fa fa-certificate" aria-hidden="true"></i> Coin
           </p>
           <a href="" style={{ textDecoration: "none", lineHeight: "2.5" }}>
             Mutual funds

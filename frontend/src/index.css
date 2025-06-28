@@ -54,3 +54,9 @@ a {
   justify-content: space-between;
   margin: 0 150px;
 } */
+
+/* form */
+
+.ip-form {
+  height: 3rem;
+}
