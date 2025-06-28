@@ -11,6 +11,7 @@ import { Position } from "./models/PositionsSchema.js";
 import PositionRouter from "./routes/PositionsRoutes.js";
 import OrderRouter from "./routes/OrderRoutes.js";
 import UserRouter from "./routes/userRoutes.js";
+import { verify } from "./utils/Auth.js";
 
 dotenv.config();
 const app = express();
@@ -153,6 +154,8 @@ const DATABASE = process.env.MONGO_URL;
 // }
 // fun();
 // insert();
+
+app.get("/api/verify", verify);
 
 app.use("/api", HoldingRouter);
 app.use("/api", PositionRouter);

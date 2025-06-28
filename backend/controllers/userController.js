@@ -10,7 +10,7 @@ export const register = async (req, res) => {
     let oldUser = await User.findOne({ email });
 
     if (oldUser) {
-      res.json({ message: "user already exist!" });
+      res.status(401).json({ message: "user already exist, please login!" });
       return;
     }
 
@@ -29,7 +29,7 @@ export const register = async (req, res) => {
     res.status(200).json({ message: token });
   } catch (e) {
     console.log("error in registering : ", e.message);
-    res.json({ message: e.message });
+    res.status(200).json({ message: e.message });
   }
 };
 
@@ -38,12 +38,12 @@ export const login = async (req, res) => {
     let { email, password } = req.body;
 
     if (!email || !password) {
-      return res.json({ message: "please provide all details " });
+      return res.status(401).json({ message: "please provide all details " });
     }
 
     let user = await User.findOne({ email });
     if (!user) {
-      res.json({ message: "Invalid email and password !" });
+      res.status(401).json({ message: "Invalid email and password !" });
       return;
     }
 
@@ -51,15 +51,14 @@ export const login = async (req, res) => {
 
     if (!isMatch) {
       console.log("your password is incorrect!");
-      res.status(404).json({ message: "incorrect password" });
-      return;
+      return res.status(401).json({ message: "incorrect password" });
     }
     const token = createSecretToken(user._id);
     console.log("User successfully loggedIn");
-    res.json({ message: token });
+    res.status(200).json({ message: token });
   } catch (e) {
     console.log("error in login", e.message);
 
-    res.json({ message: e.message });
+    res.status(401).json({ message: e.message });
   }
 };
