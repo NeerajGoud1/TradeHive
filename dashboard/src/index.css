@@ -842,3 +842,41 @@ hr {
 .action:hover {
   background-color: rgb(212, 212, 212);
 }
+
+.success-alert {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.4s forwards;
+  z-index: 9999;
+}
+
+@keyframes slideDown {
+  to {
+    top: 20px;
+  }
+}
+
+.fail-alert {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: red; /* Green */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.4s forwards;
+  z-index: 9999;
+}

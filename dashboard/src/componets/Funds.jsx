@@ -75,9 +75,12 @@ const Funds = () => {
         </div>
 
         <div className="col">
-          <div className="commodity">
-            <p>You don't have a commodity account</p>
-            <Link className="btn btn-blue">Open Account</Link>
+          <div
+            className="commodity text-muted"
+            style={{ fontWeight: "20", margin: "auto" }}
+          >
+            {" "}
+            This is not implemented yet!
           </div>
         </div>
       </div>

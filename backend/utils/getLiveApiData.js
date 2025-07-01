@@ -45,6 +45,8 @@ export function getopenAndCurrValue(symbol) {
     QUICKHEAL: 308.55,
     WIPRO: 577.75,
     "M&M": 779.8,
+    RELIANCE: 1207,
+    HUL: 1199,
   };
 
   const openingPrices = {
@@ -55,6 +57,8 @@ export function getopenAndCurrValue(symbol) {
     QUICKHEAL: 310.0,
     WIPRO: 570.0,
     "M&M": 780.5,
+    RELIANCE: 1200,
+    HUL: 1300,
   };
   return [currentPrices[`${symbol}`], openingPrices[`${symbol}`]];
 }

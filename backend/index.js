@@ -7,11 +7,14 @@ import { Holding } from "./models/HoldingSchema.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { Position } from "./models/PositionsSchema.js";
+import { Order } from "./models/OrderSchema.js";
 
 import PositionRouter from "./routes/PositionsRoutes.js";
 import OrderRouter from "./routes/OrderRoutes.js";
 import UserRouter from "./routes/userRoutes.js";
 import { verify } from "./utils/Auth.js";
+import { User } from "./models/userSchema.js";
+import { authenticate } from "./utils/Auth.js";
 
 dotenv.config();
 const app = express();
@@ -154,6 +157,21 @@ const DATABASE = process.env.MONGO_URL;
 // }
 // fun();
 // insert();
+
+// async function del() {
+//   await Order.deleteMany({});
+//   await Holding.deleteMany({});
+//   await Position.deleteMany({});
+//   await User.deleteMany({});
+//   console.log("deleted");
+// }
+// del();
+
+app.get("/getuserdata", authenticate, async (req, res) => {
+  const data = await User.findById(req.user._id);
+  console.log(data);
+  res.json(data);
+});
 
 app.get("/api/verify", verify);
 

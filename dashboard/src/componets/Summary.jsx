@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Summary = () => {
   const [holdings, setHoldings] = useState([]);
+  const [user, setUser] = useState([]);
 
   const totalInvestment = holdings
     .reduce((acc, stock) => {
@@ -25,8 +26,27 @@ const Summary = () => {
 
   useEffect(() => {
     const getHoldings = async () => {
+      let token = localStorage.getItem("token");
       try {
-        let response = await axios.get("http://localhost:3002/api/holdings");
+        let response = await axios.get(
+          "http://localhost:3002/api/holdings",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+          {
+            validateStatus: () => true,
+          }
+        );
+        let res2 = await axios.get(
+          "http://localhost:3002/getuserdata",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+          {
+            validateStatus: () => true,
+          }
+        );
+        setUser(res2.data.username);
         setHoldings(response.data);
       } catch (err) {
         console.error("Fetch failed:", err);
@@ -37,7 +57,7 @@ const Summary = () => {
   return (
     <>
       <div className="username">
-        <h6>Hi, User!</h6>
+        <h6>Hi, {user}!</h6>
         <hr className="divider" />
       </div>
 

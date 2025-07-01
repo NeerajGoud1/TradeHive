@@ -1,42 +1,74 @@
 import { Order } from "../models/OrderSchema.js";
 import { Holding } from "../models/HoldingSchema.js";
+import { Position } from "../models/PositionsSchema.js";
 
 import { getopenAndCurrValue } from "../utils/getLiveApiData.js";
+
 const addOrder = async (req, res) => {
-  const data = req.body;
-  let newOrder = new Order({
-    name: req.body.name,
-    qty: req.body.qty,
-    price: req.body.price,
-    mode: req.body.mode,
-  });
+  try {
+    const { name, qty, price, mode } = req.body;
 
-  let liveData = getopenAndCurrValue(data.name);
-  let avg = req.body.price;
-  let currPrice = liveData[0];
-  let openingPrice = liveData[1];
-  const net = ((currPrice - avg) / avg) * 100;
-  const day = ((currPrice - openingPrice) / openingPrice) * 100;
+    const [currPrice, openingPrice] = getopenAndCurrValue(name);
 
-  let newHolding = new Holding({
-    name: req.body.name,
-    qty: req.body.qty,
-    avg: avg,
-    price: currPrice,
-    net: net.toFixed(2) + "%",
-    day: day.toFixed(2) + "%",
-  });
+    const net = ((currPrice - price) / price) * 100;
+    const day = ((currPrice - openingPrice) / openingPrice) * 100;
 
-  await newOrder.save();
+    const newOrder = new Order({
+      name,
+      qty,
+      price,
+      mode,
+      user: req.user._id,
+    });
+    await newOrder.save();
 
-  await newHolding.save();
+    const newHolding = new Holding({
+      name,
+      qty,
+      avg: price,
+      price: currPrice,
+      net: net.toFixed(2) + "%",
+      day: day.toFixed(2) + "%",
+      user: req.user._id,
+    });
+    await newHolding.save();
 
-  res.json("order placed");
+    let position = await Position.findOne({ name });
+
+    if (position) {
+      const totalQty = position.qty + qty;
+      const totalValue = position.avg * position.qty + price * qty;
+      position.qty = totalQty;
+      position.avg = totalValue / totalQty;
+      position.price = currPrice;
+      position.net = net.toFixed(2) + "%";
+      position.day = day.toFixed(2) + "%";
+      position.isLoss = currPrice < position.avg;
+      await position.save();
+    } else {
+      const newPosition = new Position({
+        product: mode,
+        name,
+        qty,
+        avg: price,
+        price: currPrice,
+        net: net.toFixed(2) + "%",
+        day: day.toFixed(2) + "%",
+        isLoss: currPrice < price,
+        user: req.user._id,
+      });
+      await newPosition.save();
+    }
+    res.json("Order placed, new Holding created, Positions updated.");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error. Could not place order." });
+  }
 };
 
 const getOrders = async (req, res) => {
   try {
-    let data = await Order.find();
+    const data = await Order.find({ user: req.user._id });
     res.json(data);
   } catch (e) {
     res.json({ error: e.message });

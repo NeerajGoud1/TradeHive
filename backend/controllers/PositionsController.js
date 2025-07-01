@@ -2,7 +2,7 @@ import { Position } from "../models/PositionsSchema.js";
 
 const getPositions = async (req, res) => {
   try {
-    let data = await Position.find({});
+    const data = await Position.find({ user: req.user._id });
     res.json(data);
   } catch (e) {
     res.json({ error: e.message });

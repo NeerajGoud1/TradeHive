@@ -10,13 +10,14 @@ const ProtectedRoute = ({ children }) => {
     async function get() {
       try {
         const params = new URLSearchParams(window.location.search);
-        const token = params.get("token");
+        let token = params.get("token");
+        if (!token) token = localStorage.getItem("token");
+        else localStorage.setItem("token", token);
 
         if (!token) {
           setAuthenticated(false);
           return;
         }
-        console.log(token);
 
         const res = await axios.get("http://localhost:3002/api/verify", {
           headers: { Authorization: `Bearer ${token}` },

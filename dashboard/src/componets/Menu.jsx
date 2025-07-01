@@ -81,17 +81,6 @@ const Menu = () => {
             </Link>
           </li>
           <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/dashboard/apps"
-              onClick={() => handleMenuClick(5)}
-            >
-              <p className={selectedMenu === 5 ? activeMenuClass : menuClass}>
-                Apps
-              </p>
-            </Link>
-          </li>
-          <li>
             <p style={{ cursor: "pointer" }} onClick={handleLogout}>
               Logout
             </p>
