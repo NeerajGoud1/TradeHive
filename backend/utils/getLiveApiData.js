@@ -50,15 +50,15 @@ export function getopenAndCurrValue(symbol) {
   };
 
   const openingPrices = {
-    INFY: 1580.0,
+    INFY: 1530.0,
     ONGC: 118.5,
     TCS: 3230.0,
     KPITTECH: 260.0,
-    QUICKHEAL: 310.0,
+    QUICKHEAL: 280.0,
     WIPRO: 570.0,
     "M&M": 780.5,
     RELIANCE: 1200,
-    HUL: 1300,
+    HUL: 1100,
   };
   return [currentPrices[`${symbol}`], openingPrices[`${symbol}`]];
 }

@@ -5,24 +5,32 @@ const Summary = () => {
   const [holdings, setHoldings] = useState([]);
   const [user, setUser] = useState([]);
 
+  const profitStyle = {
+    color: "rgb(72, 194, 55);",
+  };
+  const lossStyle = {
+    color: "rgb(250, 118, 78)",
+  };
   const totalInvestment = holdings
-    .reduce((acc, stock) => {
-      return acc + stock.avg;
-    }, 0)
+    .reduce((acc, stock) => acc + stock.avg * stock.qty, 0)
     .toFixed(2);
 
-  const totalcurrValue = holdings
-    .reduce((acc, stock) => {
-      return acc + stock.avg * stock.qty;
-    }, 0)
+  const totalCurrValue = holdings
+    .reduce((acc, stock) => acc + stock.price * stock.qty, 0)
     .toFixed(2);
+
+  const pandlRaw = totalCurrValue - totalInvestment;
+
+  const pandl = pandlRaw.toFixed(2);
+  const plPercentage = ((pandlRaw / totalInvestment) * 100).toFixed(2);
+
+  const isTotalProfit = pandlRaw >= 0.0;
+
+  const totalClass = isTotalProfit ? profitStyle : lossStyle;
 
   function formatToK(value) {
     return (value / 1000).toFixed(2) + "k";
   }
-
-  const pandl = totalcurrValue - totalInvestment;
-  const plPercentage = (pandl / totalInvestment) * 100;
 
   useEffect(() => {
     const getHoldings = async () => {
@@ -68,7 +76,7 @@ const Summary = () => {
 
         <div className="data">
           <div className="first">
-            <h3>3.74k</h3>
+            <h3>5.5k</h3>
             <p>Margin available</p>
           </div>
           <hr />
@@ -78,7 +86,7 @@ const Summary = () => {
               Margins used <span>0</span>{" "}
             </p>
             <p>
-              Opening balance <span>3.74k</span>{" "}
+              Opening balance <span>5.5k</span>{" "}
             </p>
           </div>
         </div>
@@ -92,8 +100,9 @@ const Summary = () => {
 
         <div className="data">
           <div className="first">
-            <h3 className="profit">
-              {formatToK(pandl)} <small>+{plPercentage.toFixed(2)}%</small>{" "}
+            <h3 style={totalClass}>
+              {formatToK(pandl)}{" "}
+              <small style={totalClass}>{plPercentage}%</small>{" "}
             </h3>
             <p>P&L</p>
           </div>
@@ -101,7 +110,7 @@ const Summary = () => {
 
           <div className="second">
             <p>
-              Current Value <span>{formatToK(totalcurrValue)}</span>{" "}
+              Current Value <span>{formatToK(totalCurrValue)}</span>{" "}
             </p>
             <p>
               Investment <span>{formatToK(totalInvestment)}</span>{" "}

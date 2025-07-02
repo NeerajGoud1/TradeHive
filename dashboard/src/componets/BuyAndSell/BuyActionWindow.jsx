@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import axios from "axios";
 import GeneralContext from "../GeneralContext";
-import { SuccessAlert } from "../Alert";
+import { SuccessAlert, FailAlert } from "../Alert";
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid }) => {
@@ -9,6 +9,20 @@ const BuyActionWindow = ({ uid }) => {
   const [stockPrice, setStockPrice] = useState(0.0);
   const [showSuccess, setShowSuccess] = useState(false);
   const { closeBuyWindow } = useContext(GeneralContext);
+  const [showFail, setShowFail] = useState(false);
+  const [failMsg, setFailMsg] = useState("");
+
+  const currentPrices = {
+    INFY: 1555.45,
+    ONGC: 116.8,
+    TCS: 3194.8,
+    KPITTECH: 266.45,
+    QUICKHEAL: 308.55,
+    WIPRO: 577.75,
+    "M&M": 779.8,
+    RELIANCE: 1207,
+    HUL: 1199,
+  };
 
   const modalRef = useRef(null);
   const offset = useRef({ x: 0, y: 0 });
@@ -38,7 +52,7 @@ const BuyActionWindow = ({ uid }) => {
   const handleBuyClick = async () => {
     const token = localStorage.getItem("token");
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:3002/api/newOrder",
         {
           name: uid,
@@ -48,8 +62,17 @@ const BuyActionWindow = ({ uid }) => {
         },
         {
           headers: { Authorization: `Bearer ${token}` },
+          validateStatus: () => true,
         }
       );
+      if (res.status !== 200) {
+        setFailMsg(res.data.message || "Failed to place Buy order.");
+        setShowFail(true);
+        setTimeout(() => {
+          setShowFail(false);
+        }, 2000);
+        return;
+      }
 
       setShowSuccess(true);
 
@@ -65,6 +88,7 @@ const BuyActionWindow = ({ uid }) => {
   return (
     <>
       {showSuccess && <SuccessAlert message="Order placed successfully!" />}
+      {showFail && <FailAlert message={failMsg} />}
       <div
         className="container"
         id="buy-window"
@@ -98,7 +122,7 @@ const BuyActionWindow = ({ uid }) => {
         </div>
 
         <div className="buttons">
-          <span>Margin required ₹140.65</span>
+          <span>Margin required {currentPrices[uid]}</span>
           <div>
             <button className="btn btn-blue" onClick={handleBuyClick}>
               Buy

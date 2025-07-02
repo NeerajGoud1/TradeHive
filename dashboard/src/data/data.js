@@ -43,13 +43,13 @@ export const watchlist = [
   },
   {
     name: "RELIANCE",
-    price: 2112.4,
+    price: 1207,
     percent: "1.44%",
     isDown: false,
   },
   {
     name: "HUL",
-    price: 512.4,
+    price: 1199,
     percent: "1.04%",
     isDown: false,
   },

@@ -10,20 +10,29 @@ const Holdings = () => {
   const [holdings, setHoldings] = useState([]);
   const navigate = useNavigate();
 
+  const profitStyle = {
+    color: "rgb(72, 194, 55);",
+  };
+  const lossStyle = {
+    color: "rgb(250, 118, 78)",
+  };
+
   const totalInvestment = holdings
-    .reduce((acc, stock) => {
-      return acc + stock.avg;
-    }, 0)
+    .reduce((acc, stock) => acc + stock.avg * stock.qty, 0)
     .toFixed(2);
 
-  const totalcurrValue = holdings
-    .reduce((acc, stock) => {
-      return acc + stock.avg * stock.qty;
-    }, 0)
+  const totalCurrValue = holdings
+    .reduce((acc, stock) => acc + stock.price * stock.qty, 0)
     .toFixed(2);
 
-  const pandl = totalcurrValue - totalInvestment;
-  const plPercentage = (pandl / totalInvestment) * 100;
+  const pandlRaw = totalCurrValue - totalInvestment;
+
+  const pandl = pandlRaw.toFixed(2);
+  const plPercentage = ((pandlRaw / totalInvestment) * 100).toFixed(2);
+
+  const isTotalProfit = pandlRaw >= 0.0;
+
+  const totalClass = isTotalProfit ? profitStyle : lossStyle;
 
   useEffect(() => {
     const getHoldings = async () => {
@@ -111,16 +120,18 @@ const Holdings = () => {
           </div>
           <div className="row">
             <div className="col">
-              <h5>{totalInvestment}</h5>
+              <h5>₹{totalInvestment}</h5>
               <p>Total investment</p>
             </div>
+
             <div className="col">
-              <h5>{totalcurrValue}</h5>
+              <h5>₹{totalCurrValue}</h5>
               <p>Current value</p>
             </div>
+
             <div className="col">
-              <h5>
-                {pandl.toFixed(2)} ({plPercentage.toFixed(2)}%)
+              <h5 style={totalClass}>
+                ₹{pandl} ({plPercentage}%)
               </h5>
               <p>P&L</p>
             </div>
