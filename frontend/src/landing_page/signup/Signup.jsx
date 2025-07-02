@@ -3,6 +3,7 @@ import OpenAccount from "../OpenAccount";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TextField, Button, Typography, Link } from "@mui/material";
+import { ProLink } from "../../ProLink";
 
 function Signup() {
   useEffect(() => {
@@ -50,7 +51,7 @@ function Signup() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3002/user/register",
+        `${ProLink}/user/register`,
         {
           username: formData.username,
           email: formData.email,
@@ -79,7 +80,7 @@ function Signup() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3002/user/login",
+        `${ProLink}/user/login`,
         {
           email: formData.email,
           password: formData.password,

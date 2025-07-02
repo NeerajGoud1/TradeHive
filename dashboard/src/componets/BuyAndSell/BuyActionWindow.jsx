@@ -3,6 +3,7 @@ import axios from "axios";
 import GeneralContext from "../GeneralContext";
 import { SuccessAlert, FailAlert } from "../Alert";
 import "./BuyActionWindow.css";
+import { ProLink } from "../../ProLink";
 
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
@@ -53,7 +54,7 @@ const BuyActionWindow = ({ uid }) => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "http://localhost:3002/api/newOrder",
+        `${ProLink}/api/newOrder`,
         {
           name: uid,
           qty: stockQuantity,

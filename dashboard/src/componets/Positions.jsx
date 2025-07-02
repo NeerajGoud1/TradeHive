@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Empty from "./Empty";
 import { useNavigate } from "react-router-dom";
+import { ProLink } from "../ProLink";
 
 const Positions = () => {
   const [positions, setPositions] = useState([]);
@@ -11,7 +12,7 @@ const Positions = () => {
       let token = localStorage.getItem("token");
       try {
         let response = await axios.get(
-          "http://localhost:3002/api/positions",
+          `${ProLink}/api/positions`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },

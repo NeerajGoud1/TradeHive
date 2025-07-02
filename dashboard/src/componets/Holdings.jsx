@@ -5,6 +5,7 @@ import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
 import { useNavigate } from "react-router-dom";
 import Empty from "./Empty";
+import { ProLink } from "../ProLink";
 
 const Holdings = () => {
   const [holdings, setHoldings] = useState([]);
@@ -39,7 +40,7 @@ const Holdings = () => {
       let token = localStorage.getItem("token");
       try {
         let response = await axios.get(
-          "http://localhost:3002/api/holdings",
+          ` ${ProLink}/api/holdings`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },

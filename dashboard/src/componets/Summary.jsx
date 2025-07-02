@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ProLink } from "../ProLink";
 
 const Summary = () => {
   const [holdings, setHoldings] = useState([]);
@@ -37,7 +38,7 @@ const Summary = () => {
       let token = localStorage.getItem("token");
       try {
         let response = await axios.get(
-          "http://localhost:3002/api/holdings",
+          `${ProLink}/api/holdings`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },
