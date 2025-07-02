@@ -17,7 +17,7 @@ const Menu = () => {
   const activeMenuClass = "menu selected";
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "https://tradehive-eight.vercel.app/?logout=1";
+    window.location.href = "https://tradehive-front.onrender.com/?logout=1";
   };
 
   return (
