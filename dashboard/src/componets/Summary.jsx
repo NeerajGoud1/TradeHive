@@ -47,7 +47,7 @@ const Summary = () => {
           }
         );
         let res2 = await axios.get(
-          "http://localhost:3002/getuserdata",
+          `${ProLink}/getuserdata`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },
