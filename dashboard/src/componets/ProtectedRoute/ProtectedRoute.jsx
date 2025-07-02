@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ProLink } from "../../ProLink";
 
 const ProtectedRoute = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(null);
@@ -19,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
           return;
         }
 
-        const res = await axios.get("http://localhost:3002/api/verify", {
+        const res = await axios.get(`${ProLink}/api/verify`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.status === 200) {
@@ -36,7 +37,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (authenticated === null) return <div>Loading...</div>;
   if (authenticated === false) {
-    window.location.href = "http://localhost:5173/signup";
+    window.location.href = "https://tradehive-eight.vercel.app/signup";
     return null;
   }
   return children;

@@ -69,7 +69,7 @@ function Signup() {
 
       const token = res.data.message;
       localStorage.setItem("token", token);
-      window.location.href = `trade-hive-dashboard-o98b7w5xw-neerajs-projects-f5cfac69.vercel.app/dashboard?token=${token}`;
+      window.location.href = `https://trade-hive-dashboard.vercel.app/dashboard?token=${token}`;
     } catch (error) {
       setErr(error.message);
     }
@@ -97,7 +97,7 @@ function Signup() {
 
       const token = res.data.message;
       localStorage.setItem("token", token);
-      window.location.href = `trade-hive-dashboard-o98b7w5xw-neerajs-projects-f5cfac69.vercel.app/dashboard?token=${token}`;
+      window.location.href = `https://trade-hive-dashboard.vercel.app/dashboard?token=${token}`;
     } catch (error) {
       setErr(error.message);
     }
