@@ -37,7 +37,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (authenticated === null) return <div>Loading...</div>;
   if (authenticated === false) {
-    window.location.href = "https://tradehive-front.onrender.com";
+    window.location.href = "https://tradehive-eight.vercel.app/signup";
     return null;
   }
   return children;
