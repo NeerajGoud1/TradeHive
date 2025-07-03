@@ -69,7 +69,7 @@ function Signup() {
 
       const token = res.data.message;
       localStorage.setItem("token", token);
-      window.location.href = `https://trade-hive-dashboard.vercel.app/dashboard?token=${token}`;
+      window.location.href = `https://trade-hive-dashboard.vercel.app?token=${token}`;
     } catch (error) {
       setErr(error.message);
     }
@@ -97,7 +97,7 @@ function Signup() {
 
       const token = res.data.message;
       localStorage.setItem("token", token);
-      window.location.href = `https://trade-hive-dashboard.vercel.app/dashboard?token=${token}`;
+      window.location.href = `https://trade-hive-dashboard.vercel.app?token=${token}`;
     } catch (error) {
       setErr(error.message);
     }
