@@ -29,14 +29,14 @@ const addOrder = async (req, res) => {
       qty,
       price,
       mode,
-      user: req.user._id,
+      user: req.userId,
     });
     // await newOrder.save();
 
     if (mode === "SELL") {
       const existingHolding = await Holding.findOne({
         name,
-        user: req.user._id,
+        user: req.userId,
       });
 
       if (!existingHolding || existingHolding.qty < qty) {
@@ -64,7 +64,7 @@ const addOrder = async (req, res) => {
         price: currPrice,
         net: net.toFixed(2) + "%",
         day: day.toFixed(2) + "%",
-        user: req.user._id,
+        user: req.userId,
       });
       await newHolding.save();
     }
@@ -107,7 +107,7 @@ const addOrder = async (req, res) => {
         net: net.toFixed(2) + "%",
         day: day.toFixed(2) + "%",
         isLoss: currPrice < price,
-        user: req.user._id,
+        user: req.userId,
       });
       await newPosition.save();
     }
@@ -123,7 +123,7 @@ const addOrder = async (req, res) => {
 
 const getOrders = async (req, res) => {
   try {
-    const data = await Order.find({ user: req.user._id });
+    const data = await Order.find({ user: req.userId });
     res.json(data);
   } catch (e) {
     res.json({ error: e.message });

@@ -5,7 +5,20 @@ import axios from "axios";
 import { TextField, Button, Typography, Link } from "@mui/material";
 import { ProLink } from "../../ProLink";
 
+//ver
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  signOut,
+} from "firebase/auth";
+
+import { app } from "../../FIrebaseAuth/Firebase";
+
 function Signup() {
+  const auth = getAuth(app);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const logout = params.get("logout");
@@ -20,7 +33,7 @@ function Signup() {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const validateFields = () => {
     if (
       !formData.email.trim() &&
@@ -46,60 +59,50 @@ function Signup() {
     return true;
   };
 
-  const handleSignup = async () => {
+  const CreateUserWithEmailAndPass = async () => {
     if (!validateFields()) return;
-
     try {
-      const res = await axios.post(
-        `${ProLink}/user/register`,
-        {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-        },
-        {
-          validateStatus: () => true,
-        }
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
       );
-
-      if (res.status !== 200) {
-        setErr(res.data.message || "Signup failed");
-        return;
-      }
-
-      const token = res.data.message;
+      const token = res.user.accessToken;
       localStorage.setItem("token", token);
-      window.location.href = `https://trade-hive-dashboard.vercel.app?token=${token}`;
-    } catch (error) {
-      setErr(error.message);
+      await sendEmailVerification(res.user);
+      console.log("Verification email sent.");
+      navigate("/verify");
+    } catch (e) {
+      console.log("error : ", e.message);
+      const code = e.message.split("(")[1].split(")")[0];
+      const readable = code
+        .replace("auth/", "")
+        .replace(/-/g, " ")
+        .replace(/^\w/, (c) => c.toUpperCase());
+      setErr(readable);
     }
   };
 
-  const handleLogin = async () => {
+  const signInWithEmailAndPass = async () => {
     if (!validateFields()) return;
-
     try {
-      const res = await axios.post(
-        `${ProLink}/user/login`,
-        {
-          email: formData.email,
-          password: formData.password,
-        },
-        {
-          validateStatus: () => true,
-        }
+      const res = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
       );
 
-      if (res.status !== 200) {
-        setErr(res.data.message || "Login failed");
-        return;
-      }
-
-      const token = res.data.message;
+      let token = res.user.accessToken;
       localStorage.setItem("token", token);
       window.location.href = `https://trade-hive-dashboard.vercel.app?token=${token}`;
-    } catch (error) {
-      setErr(error.message);
+    } catch (e) {
+      console.log("error : ", e.message);
+      const code = e.message.split("(")[1].split(")")[0];
+      const readable = code
+        .replace("auth/", "")
+        .replace(/-/g, " ")
+        .replace(/^\w/, (c) => c.toUpperCase());
+      setErr(readable);
     }
   };
 
@@ -181,7 +184,7 @@ function Signup() {
             color="primary"
             fullWidth
             sx={{ mt: 2 }}
-            onClick={have ? handleLogin : handleSignup}
+            onClick={have ? signInWithEmailAndPass : CreateUserWithEmailAndPass}
           >
             {have ? "Login" : "Sign Up"}
           </Button>

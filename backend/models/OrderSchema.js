@@ -6,8 +6,7 @@ const OrderSchema = new Schema({
   price: Number,
   mode: String,
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
     required: true,
   },
 });

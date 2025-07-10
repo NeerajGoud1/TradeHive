@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { User } from "./userSchema.js";
 
 const PositionsSchema = new Schema({
   product: String,
@@ -11,8 +10,7 @@ const PositionsSchema = new Schema({
   day: String,
   isLoss: Boolean,
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
     required: true,
   },
 });

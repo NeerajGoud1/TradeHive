@@ -8,8 +8,7 @@ const HoldingSchema = new Schema({
   net: String,
   day: String,
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
     required: true,
   },
 });

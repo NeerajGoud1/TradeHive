@@ -7,7 +7,7 @@ const Summary = () => {
   const [user, setUser] = useState([]);
 
   const profitStyle = {
-    color: "rgb(72, 194, 55);",
+    color: "rgb(72, 194, 55)",
   };
   const lossStyle = {
     color: "rgb(250, 118, 78)",
@@ -55,7 +55,8 @@ const Summary = () => {
             validateStatus: () => true,
           }
         );
-        setUser(res2.data.username);
+        const [username, domain] = res2.data.email.split("@");
+        setUser(username);
         setHoldings(response.data);
       } catch (err) {
         console.error("Fetch failed:", err);

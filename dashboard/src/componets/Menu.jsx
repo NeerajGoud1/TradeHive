@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { app } from "../FirebaseConfig";
+import { getAuth, signOut } from "firebase/auth";
+const auth = getAuth(app);
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -15,9 +18,16 @@ const Menu = () => {
 
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "https://tradehive-eight.vercel.app?logout=1";
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem("token");
+      console.log("User signed out successfully.");
+      window.location.href = "https://tradehive-eight.vercel.app?logout=1";
+    } catch (e) {
+      console.log("Logout error: ", e.message);
+    }
   };
 
   return (
