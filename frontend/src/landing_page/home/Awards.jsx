@@ -2,53 +2,53 @@ import React from "react";
 
 function Awards() {
   return (
-    <div className="container mt-5">
-      <div className="row ">
-        <div className="col-6 p-5">
-          <img src="media/images/largestBroker.svg" alt="" />
+    <div className="container mt-5 mb-5 p-5">
+      <div className="row align-items-center">
+        {/* Image column */}
+        <div className="col-md-6 mb-4 mb-md-0 text-center">
+          <img
+            src="media/images/largestBroker.svg"
+            alt="Largest Broker"
+            className="img-fluid"
+          />
         </div>
-        <div className="col-6 p-5 mt-5">
+
+        {/* Content column */}
+        <div className="col-md-6">
           <h2>Largest stock broker in India</h2>
           <p>
             2+ million TradeHive clients contribute to over 15% of all retail
             order volumes in India daily by trading and investing in:
           </p>
-          <div className="row mt-5">
+
+          <div className="row mt-4">
             <div className="col-6">
-              <ul>
-                <li>
-                  <p>Futures and Options</p>
-                </li>
-                <li>
-                  <p>Commodity Derivaties</p>
-                </li>
-                <li>
-                  <p>Currency Derivaties</p>
-                </li>
+              <ul className="list-unstyled">
+                <li>Futures and Options</li>
+                <li>Commodity Derivatives</li>
+                <li>Currency Derivatives</li>
               </ul>
             </div>
             <div className="col-6">
-              <ul>
-                <li>
-                  <p>Stocks & IPOs </p>
-                </li>
-                <li>
-                  <p>Direct Mutual Funds</p>
-                </li>
-                <li>
-                  <p>Bonds and Govt Securities</p>
-                </li>
+              <ul className="list-unstyled">
+                <li>Stocks & IPOs</li>
+                <li>Direct Mutual Funds</li>
+                <li>Bonds and Govt Securities</li>
               </ul>
             </div>
           </div>
-          <img
-            src="media/images/pressLogos.png"
-            alt="pressLogo"
-            style={{ width: "90%" }}
-          />
+
+          <div className="mt-4">
+            <img
+              src="media/images/pressLogos.png"
+              alt="Press Logos"
+              className="img-fluid"
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
 export default Awards;

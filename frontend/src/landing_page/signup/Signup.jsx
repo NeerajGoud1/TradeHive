@@ -116,7 +116,7 @@ function Signup() {
 
   return (
     <div className="container">
-      <div className="row mt-5 p-5 text-center">
+      <div className="row mt-5 p-3 text-center">
         <Typography variant="h4" gutterBottom>
           {have ? "Login to your Dashboard" : "Register to get your Dashboard"}
         </Typography>
@@ -126,8 +126,8 @@ function Signup() {
         </Typography>
       </div>
 
-      <div className="row mt-3 p-5">
-        <div className="col-6">
+      <div className="row mt-3 p-md-5 p-4">
+        <div className="col-12 col-md-6 mb-md-0 mb-5">
           <img
             src="/media/images/account_open.svg"
             alt="Open Account Illustration"
@@ -135,7 +135,7 @@ function Signup() {
         </div>
         <div className="col-1"></div>
 
-        <div className="col-5">
+        <div className="col-12 col-md-5 ">
           <Typography variant="h5" gutterBottom>
             {have ? "Login now" : "Signup now"}
           </Typography>

@@ -5,67 +5,57 @@ function Footer() {
     <footer style={{ backgroundColor: "rgb(250, 250, 250)" }}>
       <div className="container border-top mt-5">
         <div className="row mt-5">
-          <div className="col">
-            <img src="media/images/logo.svg" style={{ width: "50%" }} />
+          <div className="col-md-3 mb-4 mb-md-0 text-center text-md-start">
+            <img
+              src="media/images/logo.svg"
+              alt="Logo"
+              className="img-fluid mb-3"
+              style={{ maxWidth: "150px" }}
+            />
             <p className="mt-3" style={{ fontSize: "13px" }}>
               &copy; 2010 - 2024, Not Zerodha Broking Ltd. All rights reserved.
             </p>
           </div>
-          <div className="col">
+          <div className="col-6 col-md-3 mb-4 mb-md-0">
             <h6>Company</h6>
-            <div className="footer-links">
-              <a href="">About</a>
-              <br />
-              <a href="">Products</a>
-              <br />
-              <a href="">Pricing</a>
-              <br />
-              <a href="">Referral programme</a>
-              <br />
-              <a href="">Careers</a>
-              <br />
-              <a href="">Zerodha.tech</a>
-              <br />
-              <a href="">Press & media</a>
-              <br />
-              <a href="">Zerodha cares (CSR)</a>
-              <br />
+            <div className="footer-links d-flex flex-column gap-1">
+              <a href="#">About</a>
+              <a href="#">Products</a>
+              <a href="#">Pricing</a>
+              <a href="#">Referral programme</a>
+              <a href="#">Careers</a>
+              <a href="#">Zerodha.tech</a>
+              <a href="#">Press & media</a>
+              <a href="#">Zerodha cares (CSR)</a>
             </div>
           </div>
-          <div className="col">
+          <div className="col-6 col-md-3 mb-4 mb-md-0">
             <h6>Support</h6>
-            <div className="footer-links">
-              <a href="">Contact</a>
-              <br />
-              <a href="">Support portal</a>
-              <br />
-              <a href="">Z-Connect blog</a>
-              <br />
-              <a href="">List of charges</a>
-              <br />
-              <a href="">Downloads & resources</a>
-              <br />
+            <div className="footer-links d-flex flex-column gap-1">
+              <a href="#">Contact</a>
+              <a href="#">Support portal</a>
+              <a href="#">Z-Connect blog</a>
+              <a href="#">List of charges</a>
+              <a href="#">Downloads & resources</a>
             </div>
           </div>
-          <div className="col">
+          <div className="col-12 col-md-3">
             <h6>Account</h6>
-            <div className="footer-links">
-              <a href="">Open an account</a>
-              <br />
-              <a href="">Fund transfer</a>
-              <br />
-              <a href="">60 day challenge</a>
-              <br />
+            <div className="footer-links d-flex flex-column gap-1">
+              <a href="#">Open an account</a>
+              <a href="#">Fund transfer</a>
+              <a href="#">60 day challenge</a>
             </div>
           </div>
         </div>
+
         <div
           className="mt-5 text-muted footer-para"
           style={{
             fontSize: "12px",
             fontWeight: "400",
             lineHeight: "20px",
-            fontFamily: "'Inter', 'Helvetica, 'Arial', sans-serif",
+            fontFamily: "'Inter', 'Helvetica', 'Arial', sans-serif",
           }}
         >
           <p>
@@ -79,21 +69,18 @@ function Footer() {
             complaints pertaining to securities broking please write to
             complaints@zerodha.com, for DP related to dp@zerodha.com. Please
             ensure you carefully read the Risk Disclosure Document as prescribed
-            by SEBh6 | ICF
+            by SEBI.
           </p>
-
           <p>
             Procedure to file a complaint on SEBI SCORES: Register on SCORES
             portal. Mandatory details for filing complaints on SCORES: Name,
             PAN, Address, Mobile Number, E-mail ID. Benefits: Effective
-            Communication, Speedy redressal of the grievances
+            Communication, Speedy redressal of the grievances.
           </p>
-
           <p>
             Investments in securities market are subject to market risks; read
             all the related documents carefully before investing.
           </p>
-
           <p>
             "Prevent unauthorised transactions in your account. Update your
             mobile numbers/email IDs with your stock brokers. Receive
@@ -113,30 +100,31 @@ function Footer() {
             create a ticket here.
           </p>
         </div>
-        <div className="row footer-down mb-4">
-          <div className="col-1">
+
+        <div className="row footer-down mb-4 mt-4 gy-2">
+          <div className="col-6 col-md-1">
             <span>NSE</span>
           </div>
-          <div className="col-1">
+          <div className="col-6 col-md-1">
             <span>BSE</span>
           </div>
-          <div className="col-1">
+          <div className="col-6 col-md-1">
             <span>MCX</span>
           </div>
-          <div className="col-2">
+          <div className="col-6 col-md-2">
             <span>Terms & Conditions</span>
           </div>
-          <div className="col-2">
+          <div className="col-6 col-md-2">
             <span>Policies & procedures</span>
           </div>
-          <div className="col-2">
-            <span>Privspancy policy </span>
+          <div className="col-6 col-md-2">
+            <span>Privacy policy</span>
           </div>
-          <div className="col-1">
+          <div className="col-6 col-md-1">
             <span>Disclosure</span>
           </div>
-          <div className="col-2">
-            <span>For investor's attention </span>
+          <div className="col-6 col-md-2">
+            <span>For investor's attention</span>
           </div>
         </div>
       </div>

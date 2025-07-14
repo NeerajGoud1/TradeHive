@@ -60,3 +60,9 @@ a {
 .ip-form {
   height: 3rem;
 }
+
+@media (min-width: 768px) {
+  .signupImg {
+    max-width: 90%;
+  }
+}
